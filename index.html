@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GESTIÓN DE PRODUCTOS</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #007bff;
+            margin-top: 20px;
+        }
+        .container {
+            margin-top: 30px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .table th, .table td {
+            text-align: center;
+        }
+        .btn-custom {
+            background-color: #007bff;
+            color: white;
+        }
+        .btn-custom:hover {
+            background-color: #0056b3;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SEGUNDO PARCIAL TEM-742</h1>
+        <h1>UNIVERSIDAD PÚBLICA DE EL ALTO</h1>
+        <p>Nombre: MARCELO CHOQUE MORALES</p>
+        <p>Carnet: 9921151 LP</p>
+        
+        <h1>GESTIÓN DE PRODUCTOS</h1>
+        <div class="text-center mb-3">
+            <a href="{{ url_for('nuevo') }}" class="btn btn-custom">Nuevo Producto</a>
+        </div>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Fecha de Vencimiento</th>
+                    <th>Categoría</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in productos %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.nombre }}</td>
+                    <td>{{ item.cantidad }}</td>
+                    <td>{{ item.precio }}</td>
+                    <td>{{ item.fec_producto }}</td>
+                    <td>{{ item.categoria }}</td>
+                    <td><a href="{{ url_for('editar', id=item.id) }}" class="btn btn-warning btn-sm">Editar</a></td>
+                    <td>
+                        <form action="{{ url_for('eliminar', id=item.id) }}" method="POST" style="display:inline;">
+                            <input type="submit" class="btn btn-danger btn-sm" value="Eliminar">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
